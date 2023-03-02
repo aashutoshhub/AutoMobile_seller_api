@@ -46,7 +46,11 @@ exports.deleteBooking = async (req, res, next) => {
 
 //getBookingDetails
 exports.getBookingDetails = async (req, res, next) => {
-  const data = await Booking.find();
+  
+  const data = await Booking.find().populate(
+    'carModel',
+    'companyName quantity'
+  );
 
   if (!data) {
     res.status(500).json({
